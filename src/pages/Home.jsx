@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
       categoriesList: [],
+      textBusca: '',
+      listProdutos: [],
+      pesquisou: false,
     };
   }
 
@@ -22,20 +24,69 @@ export default class Home extends Component {
     console.log(categoriesList);
   };
 
+  handleChange = ({ target }) => {
+    const { value, name } = target;
+
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleClick = async () => {
+    const { textBusca } = this.state;
+    const produtos = await getProductsFromCategoryAndQuery(null, textBusca);
+
+    this.setState({
+      listProdutos: produtos.results,
+      pesquisou: true,
+    });
+  };
+
   render() {
-    const { listaProdutos } = this.props;
-    const { categoriesList } = this.state;
+    const { categoriesList, textBusca, listProdutos, pesquisou } = this.state;
     return (
       <main>
+        <div className="campoDeBusca">
+          <input
+            type="text"
+            name="textBusca"
+            value={ textBusca }
+            onChange={ this.handleChange }
+            data-testid="query-input"
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.handleClick }
+          >
+            Pesquisar
+
+          </button>
+        </div>
         <div>
           {
-            listaProdutos.length === 0 && (
+            listProdutos.length === 0 && (
               <h1
                 data-testid="home-initial-message"
               >
                 Digite algum termo de pesquisa ou escolha uma categoria.
 
               </h1>)
+          }
+        </div>
+        <div>
+          {
+            pesquisou && listProdutos.length === 0
+              ? <p>Nenhum produto foi encontrado</p>
+              : (
+                listProdutos.map((e) => (
+                  <div data-testid="product" key={ e.id }>
+                    <img src={ e.thumbnail } alt={ e.title } />
+                    <p>{e.title}</p>
+                    <p>{`Valor: ${e.price}`}</p>
+                  </div>
+                ))
+              )
           }
         </div>
         <div>
@@ -65,7 +116,3 @@ export default class Home extends Component {
     );
   }
 }
-
-Home.propTypes = {
-  listaProdutos: PropTypes.shape(),
-}.isRequired;
