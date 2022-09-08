@@ -5,12 +5,7 @@ import Home from './pages/Home';
 import ShopCart from './pages/ShopCart';
 
 class App extends React.Component {
-  state = {
-    listaProdutos: [],
-  };
-
   render() {
-    const { listaProdutos } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -18,9 +13,7 @@ class App extends React.Component {
             <Route
               exact
               path="/"
-              render={
-                (props) => <Home { ...props } listaProdutos={ listaProdutos } />
-              }
+              component={ Home }
             />
             <Route
               path="/ShopCart"
