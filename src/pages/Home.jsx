@@ -7,24 +7,24 @@ export default class Home extends Component {
     const { listaProdutos } = this.props;
     return (
       <main>
-      <div>
-        {
-          listaProdutos.length === 0 && (
-            <h1
-              data-testid="home-initial-message"
-            >
-              Digite algum termo de pesquisa ou escolha uma categoria.
+        <div>
+          {
+            listaProdutos.length === 0 && (
+              <h1
+                data-testid="home-initial-message"
+              >
+                Digite algum termo de pesquisa ou escolha uma categoria.
 
-            </h1>)
-        }
-      </div>
-      <div>
-        <p>
-          <Link to="/ShopCart" data-testid="shopping-cart-button">
-            Carrinho de compras
-          </Link>
-        </p>
-      </div>
+              </h1>)
+          }
+        </div>
+        <div>
+          <p>
+            <Link to="/ShopCart" data-testid="shopping-cart-button">
+              Carrinho de compras
+            </Link>
+          </p>
+        </div>
       </main>
     );
   }
