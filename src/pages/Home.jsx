@@ -10,6 +10,7 @@ export default class Home extends Component {
       textBusca: '',
       listProdutos: [],
       pesquisou: false,
+
     };
   }
 
@@ -36,6 +37,14 @@ export default class Home extends Component {
     const { textBusca } = this.state;
     const produtos = await getProductsFromCategoryAndQuery(null, textBusca);
 
+    this.setState({
+      listProdutos: produtos.results,
+      pesquisou: true,
+    });
+  };
+
+  categoryClick = async (event) => {
+    const produtos = await getProductsFromCategoryAndQuery(event.target.name, null);
     this.setState({
       listProdutos: produtos.results,
       pesquisou: true,
@@ -105,6 +114,7 @@ export default class Home extends Component {
                   data-testid="category"
                   type="button"
                   name={ elem.id }
+                  onClick={ this.categoryClick }
                 >
                   { elem.name }
                 </button>
