@@ -57,8 +57,18 @@ export default class Home extends Component {
   handleCart = async (id) => {
     const { listProdutos, localState } = this.state;
     const produto = listProdutos.find((elem) => elem.id === id);
-    localState.push(produto);
-    setLocalItems(localState);
+    const existe = localState.some((e) => e.id === produto.id);
+    if (existe) {
+      produto.quantidade += 1;
+      const existente = localState.findIndex((e) => e.id === produto.id);
+      localState.splice(existente, 1);
+      localState.push(produto);
+      setLocalItems(localState);
+    } else {
+      produto.quantidade = Number(1);
+      localState.push(produto);
+      setLocalItems(localState);
+    }
   };
 
   render() {

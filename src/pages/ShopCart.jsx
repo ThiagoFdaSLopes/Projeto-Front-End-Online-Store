@@ -30,14 +30,7 @@ export default class ShopCart extends Component {
                   </div>
 
                   <p data-testid="shopping-cart-product-quantity">
-                    {
-                      carrinho.reduce((acc, elem) => {
-                        if (elem.id === e.id) {
-                          acc += 1;
-                        }
-                        return acc;
-                      }, 0)
-                    }
+                    {e.quantidade}
                   </p>
                 </div>
               ))
