@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery,
+  setLocalItems } from '../services/api';
 
 export default class Home extends Component {
   constructor() {
@@ -10,12 +11,16 @@ export default class Home extends Component {
       textBusca: '',
       listProdutos: [],
       pesquisou: false,
-
+      localState: [],
     };
   }
 
   componentDidMount() {
     this.fetchCategories();
+    const local = JSON.parse(localStorage.getItem('cartItems')) || [];
+    this.setState({
+      localState: local,
+    });
   }
 
   fetchCategories = async () => {
@@ -49,6 +54,22 @@ export default class Home extends Component {
       listProdutos: produtos.results,
       pesquisou: true,
     });
+  };
+
+  handleCart = async (id) => {
+    /* const { cart, listProdutos } = this.state;
+    const addToCart = listProdutos.find((elem) => elem.id === event.target.name);
+    cart.push(addToCart);
+    const setItem = await setLocalItems(cart);
+    return setItem; */
+
+    const { listProdutos, localState } = this.state;
+    const produto = listProdutos.find((elem) => elem.id === id);
+
+    // const arrayProdutos = [];
+    // const getStorage = getLocalItems();
+    localState.push(produto);
+    setLocalItems(localState);
   };
 
   render() {
@@ -89,18 +110,31 @@ export default class Home extends Component {
               ? <p>Nenhum produto foi encontrado</p>
               : (
                 listProdutos.map((e) => (
-                  <div data-testid="product" key={ e.id }>
-                    <img src={ e.thumbnail } alt={ e.title } />
-                    <p>{e.title}</p>
-                    <p>{`Valor: ${e.price}`}</p>
-                    <Link
-                      data-testid="product-detail-link"
-                      to={ `/productdetails/${e.id}` }
-                    >
-                      Detalhes
+                  <>
+                    <div data-testid="product" key={ e.id }>
+                      <img src={ e.thumbnail } alt={ e.title } />
+                      <p>{e.title}</p>
+                      <p>{`Valor: ${e.price}`}</p>
+                      <Link
+                        data-testid="product-detail-link"
+                        to={ `/productdetails/${e.id}` }
+                      >
+                        Detalhes
 
-                    </Link>
-                  </div>
+                      </Link>
+                    </div>
+
+                    <div>
+                      <button
+                        name={ e.id }
+                        type="button"
+                        data-testid="product-add-to-cart"
+                        onClick={ () => this.handleCart(e.id) }
+                      >
+                        Adicionar ao Carrinho!
+                      </button>
+                    </div>
+                  </>
                 ))
               )
           }
