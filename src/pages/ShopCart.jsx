@@ -28,11 +28,11 @@ export default class ShopCart extends Component {
                 <>
                   <div data-testid="product" key={ e.id }>
                     <img src={ e.thumbnail } alt={ e.title } />
-                    <p>{e.title}</p>
+                    <p data-testid="shopping-cart-product-name">{e.title}</p>
                     <p>{`Valor: ${e.price}`}</p>
                   </div>
 
-                  <p>
+                  <p data-testid="shopping-cart-product-quantity">
                     {
                       carrinho.reduce((acc, elem) => {
                         if (elem.id === e.id) {
