@@ -28,7 +28,7 @@ export default class ShopCart extends Component {
       setLocalItems(carrinho);
     }
     this.getLocalStorage();
-  }
+  };
 
   sub = (objP) => {
     const { carrinho } = this.state;
@@ -44,7 +44,7 @@ export default class ShopCart extends Component {
       this.remove(objP);
     }
     this.getLocalStorage();
-  }
+  };
 
   remove = (objP) => {
     const { carrinho } = this.state;
@@ -53,7 +53,7 @@ export default class ShopCart extends Component {
     setLocalItems(carrinho);
     this.getLocalStorage();
     //
-  }
+  };
 
   render() {
     const { carrinho } = this.state;
@@ -65,9 +65,9 @@ export default class ShopCart extends Component {
             ? <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
             : (
               carrinho.map((e) => (
-                <div data-testid="product" key={e.id}>
+                <div data-testid="product" key={ e.id }>
                   <div>
-                    <img src={e.thumbnail} alt={e.title} />
+                    <img src={ e.thumbnail } alt={ e.title } />
                     <p data-testid="shopping-cart-product-name">{e.title}</p>
                     <p>{`Valor: ${e.price}`}</p>
                   </div>
@@ -75,7 +75,7 @@ export default class ShopCart extends Component {
                     <button
                       type="button"
                       data-testid="product-increase-quantity"
-                      onClick={() => this.sum(e)}
+                      onClick={ () => this.sum(e) }
                     >
                       +
                     </button>
@@ -85,14 +85,14 @@ export default class ShopCart extends Component {
                     <button
                       type="button"
                       data-testid="product-decrease-quantity"
-                      onClick={() => this.sub(e)}
+                      onClick={ () => this.sub(e) }
                     >
                       -
                     </button>
                     <button
                       type="button"
                       data-testid="remove-product"
-                      onClick={() => this.remove(e)}
+                      onClick={ () => this.remove(e) }
                     >
                       remova item
                     </button>
