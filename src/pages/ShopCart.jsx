@@ -14,9 +14,6 @@ export default class ShopCart extends Component {
 
   render() {
     const { carrinho } = this.state;
-    const filter = carrinho.filter((e, i) => carrinho.indexOf(e) === i);
-    console.log(filter);
-
     return (
       <div>
         <h1>Carrinho de compras</h1>
@@ -25,8 +22,8 @@ export default class ShopCart extends Component {
             ? <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
             : (
               carrinho.map((e) => (
-                <>
-                  <div data-testid="product" key={ e.id }>
+                <div data-testid="product" key={ e.id }>
+                  <div>
                     <img src={ e.thumbnail } alt={ e.title } />
                     <p data-testid="shopping-cart-product-name">{e.title}</p>
                     <p>{`Valor: ${e.price}`}</p>
@@ -42,7 +39,7 @@ export default class ShopCart extends Component {
                       }, 0)
                     }
                   </p>
-                </>
+                </div>
               ))
             )
         }

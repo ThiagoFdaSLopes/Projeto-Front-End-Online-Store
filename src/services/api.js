@@ -26,7 +26,7 @@ export function setLocalItems(elems) {
   localStorage.setItem('cartItems', JSON.stringify(elems));
 }
 
-export function getLocalItems() {
-  const cartParse = JSON.parse(localStorage.getItem('cartItems'));
-  return cartParse;
-}
+// export function getLocalItems() {
+//   const cartParse = JSON.parse(localStorage.getItem('cartItems'));
+//   return cartParse;
+// }
