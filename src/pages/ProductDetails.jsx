@@ -6,7 +6,7 @@ import { getProduct, setLocalItems } from '../services/api';
 export default class ProductDetails extends Component {
   state = {
     productId: [],
-    productObj: {},
+    // productObj: {},
     carrinho: [],
   };
 
@@ -24,16 +24,27 @@ export default class ProductDetails extends Component {
   getProduct = async () => {
     const { match: { params: { id } } } = this.props;
     const product = await getProduct(id);
+    product.quantidade = Number(1);
     this.setState({
       productId: [product],
-      productObj: product,
+      // productObj: product,
     });
   };
 
-  sendCart = () => {
-    const { productObj, carrinho } = this.state;
-    carrinho.push(productObj);
-    setLocalItems(carrinho);
+  sendCart = (objP) => {
+    const { carrinho } = this.state;
+    const existe = carrinho.some((e) => e.id === objP.id);
+    if (existe) {
+      objP.quantidade += 1;
+      const existente = carrinho.findIndex((e) => e.id === objP.id);
+      carrinho.splice(existente, 1);
+      carrinho.push(objP);
+      setLocalItems(carrinho);
+    } else {
+      objP.quantidade = Number(1);
+      carrinho.push(objP);
+      setLocalItems(carrinho);
+    }
   };
 
   render() {
@@ -63,7 +74,7 @@ export default class ProductDetails extends Component {
               </div>
               <button
                 type="button"
-                onClick={ this.sendCart }
+                onClick={ () => this.sendCart(e) }
                 data-testid="product-detail-add-to-cart"
               >
                 add carrinho
