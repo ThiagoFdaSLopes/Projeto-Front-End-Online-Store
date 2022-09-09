@@ -24,10 +24,8 @@ export default class Home extends Component {
   }
 
   fetchCategories = async () => {
-    const { categoriesList } = this.state;
     const data = await getCategories();
     this.setState({ categoriesList: data });
-    console.log(categoriesList);
   };
 
   handleChange = ({ target }) => {
@@ -57,17 +55,8 @@ export default class Home extends Component {
   };
 
   handleCart = async (id) => {
-    /* const { cart, listProdutos } = this.state;
-    const addToCart = listProdutos.find((elem) => elem.id === event.target.name);
-    cart.push(addToCart);
-    const setItem = await setLocalItems(cart);
-    return setItem; */
-
     const { listProdutos, localState } = this.state;
     const produto = listProdutos.find((elem) => elem.id === id);
-
-    // const arrayProdutos = [];
-    // const getStorage = getLocalItems();
     localState.push(produto);
     setLocalItems(localState);
   };
@@ -110,8 +99,8 @@ export default class Home extends Component {
               ? <p>Nenhum produto foi encontrado</p>
               : (
                 listProdutos.map((e) => (
-                  <>
-                    <div data-testid="product" key={ e.id }>
+                  <div data-testid="product" key={ e.id }>
+                    <div>
                       <img src={ e.thumbnail } alt={ e.title } />
                       <p>{e.title}</p>
                       <p>{`Valor: ${e.price}`}</p>
@@ -134,7 +123,7 @@ export default class Home extends Component {
                         Adicionar ao Carrinho!
                       </button>
                     </div>
-                  </>
+                  </div>
                 ))
               )
           }
