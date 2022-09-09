@@ -52,6 +52,7 @@ export default class ShopCart extends Component {
     carrinho.splice(existente, 1);
     setLocalItems(carrinho);
     this.getLocalStorage();
+    //
   }
 
   render() {
