@@ -93,6 +93,13 @@ export default class Home extends Component {
                     <img src={ e.thumbnail } alt={ e.title } />
                     <p>{e.title}</p>
                     <p>{`Valor: ${e.price}`}</p>
+                    <Link
+                      data-testid="product-detail-link"
+                      to={ `/productdetails/${e.id}` }
+                    >
+                      Detalhes
+
+                    </Link>
                   </div>
                 ))
               )
