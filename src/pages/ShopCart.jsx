@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { setLocalItems } from '../services/api';
 
 export default class ShopCart extends Component {
   state = {
@@ -6,11 +7,53 @@ export default class ShopCart extends Component {
   };
 
   componentDidMount() {
+    this.getLocalStorage();
+  }
+
+  getLocalStorage = () => {
     const local = JSON.parse(localStorage.getItem('cartItems')) || [];
     this.setState({
       carrinho: local,
     });
-  }
+  };
+
+  sum = (objP) => {
+    const { carrinho } = this.state;
+    const existe = carrinho.some((e) => e.id === objP.id);
+    if (existe) {
+      objP.quantidade += 1;
+      const existente = carrinho.findIndex((e) => e.id === objP.id);
+      carrinho.splice(existente, 1);
+      carrinho.push(objP);
+      setLocalItems(carrinho);
+    }
+    this.getLocalStorage();
+  };
+
+  sub = (objP) => {
+    const { carrinho } = this.state;
+    const existe = carrinho.some((e) => e.id === objP.id);
+    if (existe) {
+      objP.quantidade -= 1;
+      const existente = carrinho.findIndex((e) => e.id === objP.id);
+      carrinho.splice(existente, 1);
+      carrinho.push(objP);
+      setLocalItems(carrinho);
+    }
+    if (objP.quantidade <= 0) {
+      this.remove(objP);
+    }
+    this.getLocalStorage();
+  };
+
+  remove = (objP) => {
+    const { carrinho } = this.state;
+    const existente = carrinho.findIndex((e) => e.id === objP.id);
+    carrinho.splice(existente, 1);
+    setLocalItems(carrinho);
+    this.getLocalStorage();
+    //
+  };
 
   render() {
     const { carrinho } = this.state;
@@ -28,10 +71,32 @@ export default class ShopCart extends Component {
                     <p data-testid="shopping-cart-product-name">{e.title}</p>
                     <p>{`Valor: ${e.price}`}</p>
                   </div>
-
-                  <p data-testid="shopping-cart-product-quantity">
-                    {e.quantidade}
-                  </p>
+                  <div>
+                    <button
+                      type="button"
+                      data-testid="product-increase-quantity"
+                      onClick={ () => this.sum(e) }
+                    >
+                      +
+                    </button>
+                    <p data-testid="shopping-cart-product-quantity">
+                      {e.quantidade}
+                    </p>
+                    <button
+                      type="button"
+                      data-testid="product-decrease-quantity"
+                      onClick={ () => this.sub(e) }
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      data-testid="remove-product"
+                      onClick={ () => this.remove(e) }
+                    >
+                      remova item
+                    </button>
+                  </div>
                 </div>
               ))
             )
