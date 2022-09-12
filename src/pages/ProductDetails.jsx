@@ -42,7 +42,6 @@ export default class ProductDetails extends Component {
     });
   };
 
-  getProduct = async () => {
   getProducts = async () => {
     const { match: { params: { id } } } = this.props;
     const product = await getProduct(id);
@@ -104,8 +103,8 @@ export default class ProductDetails extends Component {
   };
 
   render() {
-    const { isInvalid, productId, emails, comentarios, stars, reviews, itensCartQT } = this.state;
-    console.log(reviews);
+    const { isInvalid,
+      productId, emails, comentarios, stars, itensCartQT } = this.state;
     return (
       <div>
         <div>
@@ -236,7 +235,6 @@ export default class ProductDetails extends Component {
 
           )))}
         </div>
-
       </div>
     );
   }
