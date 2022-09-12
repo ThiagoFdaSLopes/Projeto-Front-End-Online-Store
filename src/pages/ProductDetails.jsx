@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Count from '../components/Count';
 import { getProduct, setLocalItems } from '../services/api';
 
 export default class ProductDetails extends Component {
@@ -8,6 +9,7 @@ export default class ProductDetails extends Component {
     productId: [],
     // productObj: {},
     carrinho: [],
+    itensCartQT: 0,
     reviews: [],
     emails: '',
     comentarios: '',
@@ -26,7 +28,19 @@ export default class ProductDetails extends Component {
     this.setState({
       carrinho: produtos,
     });
+    this.getLocalStorage();
   }
+
+  getLocalStorage = () => {
+    const local = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const QTLocal = local.reduce((acc, curr) => {
+      acc += curr.quantidade;
+      return acc;
+    }, 0);
+    this.setState({
+      itensCartQT: QTLocal,
+    });
+  };
 
   getProducts = async () => {
     const { match: { params: { id } } } = this.props;
@@ -53,6 +67,7 @@ export default class ProductDetails extends Component {
       carrinho.push(objP);
       setLocalItems(carrinho);
     }
+    this.getLocalStorage();
   };
 
   handleChange = ({ target }) => {
@@ -88,10 +103,8 @@ export default class ProductDetails extends Component {
   };
 
   render() {
-    const { isInvalid, productId, emails, comentarios, stars, reviews } = this.state;
-
-    console.log(reviews);
-
+    const { isInvalid,
+      productId, emails, comentarios, stars, itensCartQT } = this.state;
     return (
       <div>
         <div>
@@ -100,6 +113,7 @@ export default class ProductDetails extends Component {
               Carrinho de compras
             </Link>
           </p>
+          <Count itensCartQT={ itensCartQT } />
         </div>
         <div>
           {productId.length > 0 && (productId.map((e) => (
@@ -221,7 +235,6 @@ export default class ProductDetails extends Component {
 
           )))}
         </div>
-
       </div>
     );
   }

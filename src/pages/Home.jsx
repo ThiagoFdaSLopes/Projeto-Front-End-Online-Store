@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Count from '../components/Count';
 import { getCategories, getProductsFromCategoryAndQuery,
   setLocalItems } from '../services/api';
 
@@ -12,6 +13,7 @@ export default class Home extends Component {
       listProdutos: [],
       pesquisou: false,
       localState: [],
+      itensCartQT: 0,
     };
   }
 
@@ -21,7 +23,19 @@ export default class Home extends Component {
     this.setState({
       localState: local,
     });
+    this.getLocalStorage();
   }
+
+  getLocalStorage = () => {
+    const local = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const QTLocal = local.reduce((acc, curr) => {
+      acc += curr.quantidade;
+      return acc;
+    }, 0);
+    this.setState({
+      itensCartQT: QTLocal,
+    });
+  };
 
   fetchCategories = async () => {
     const data = await getCategories();
@@ -69,10 +83,12 @@ export default class Home extends Component {
       localState.push(produto);
       setLocalItems(localState);
     }
+    this.getLocalStorage();
   };
 
   render() {
-    const { categoriesList, textBusca, listProdutos, pesquisou } = this.state;
+    const { categoriesList,
+      textBusca, listProdutos, pesquisou, itensCartQT } = this.state;
     return (
       <main>
         <div className="campoDeBusca">
@@ -89,8 +105,8 @@ export default class Home extends Component {
             onClick={ this.handleClick }
           >
             Pesquisar
-
           </button>
+          <Count itensCartQT={ itensCartQT } />
         </div>
         <div>
           {
