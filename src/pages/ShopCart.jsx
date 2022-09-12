@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { setLocalItems } from '../services/api';
 
 export default class ShopCart extends Component {
@@ -52,7 +53,6 @@ export default class ShopCart extends Component {
     carrinho.splice(existente, 1);
     setLocalItems(carrinho);
     this.getLocalStorage();
-    //
   };
 
   render() {
@@ -101,6 +101,12 @@ export default class ShopCart extends Component {
               ))
             )
         }
+        <Link
+          data-testid="checkout-products"
+          to="/checkout"
+        >
+          Finalizar compra
+        </Link>
       </div>
     );
   }
