@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Count from '../components/Count';
 import PropTypes from 'prop-types';
+import Count from '../components/Count';
 import { getProduct, setLocalItems } from '../services/api';
 
 export default class ProductDetails extends Component {
@@ -29,7 +29,7 @@ export default class ProductDetails extends Component {
     const QTLocal = local.reduce((acc, curr) => {
       acc += curr.quantidade;
       return acc;
-    }, 0)
+    }, 0);
     this.setState({
       itensCartQT: QTLocal,
     });

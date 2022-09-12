@@ -31,7 +31,7 @@ export default class Home extends Component {
     const QTLocal = local.reduce((acc, curr) => {
       acc += curr.quantidade;
       return acc;
-    }, 0)
+    }, 0);
     this.setState({
       itensCartQT: QTLocal,
     });
@@ -87,7 +87,8 @@ export default class Home extends Component {
   };
 
   render() {
-    const { categoriesList, textBusca, listProdutos, pesquisou, itensCartQT } = this.state;
+    const { categoriesList,
+      textBusca, listProdutos, pesquisou, itensCartQT } = this.state;
     return (
       <main>
         <div className="campoDeBusca">

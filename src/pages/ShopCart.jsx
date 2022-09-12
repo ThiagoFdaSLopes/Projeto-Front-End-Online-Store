@@ -18,7 +18,7 @@ export default class ShopCart extends Component {
     const QTLocal = local.reduce((acc, curr) => {
       acc += curr.quantidade;
       return acc;
-    }, 0)
+    }, 0);
     this.setState({
       carrinho: local,
       itensCartQT: QTLocal,
