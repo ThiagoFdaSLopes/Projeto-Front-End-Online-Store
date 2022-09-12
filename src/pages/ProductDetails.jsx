@@ -8,23 +8,31 @@ export default class ProductDetails extends Component {
     productId: [],
     // productObj: {},
     carrinho: [],
+    reviews: [],
+    emails: '',
+    comentarios: '',
+    stars: '',
+    // itemsAvaliacoes: [],
+    isInvalid: false,
   };
 
   componentDidMount() {
     const inicio = async () => {
-      await this.getProduct();
+      await this.getProducts();
     };
     inicio();
+
     const produtos = JSON.parse(localStorage.getItem('cartItems')) || [];
     this.setState({
       carrinho: produtos,
     });
   }
 
-  getProduct = async () => {
+  getProducts = async () => {
     const { match: { params: { id } } } = this.props;
     const product = await getProduct(id);
     product.quantidade = Number(1);
+    product.avaliacao = [];
     this.setState({
       productId: [product],
       // productObj: product,
@@ -47,8 +55,43 @@ export default class ProductDetails extends Component {
     }
   };
 
+  handleChange = ({ target }) => {
+    const { value, name } = target;
+
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  submitReview = (objAvaliar) => {
+    const { emails, comentarios, stars } = this.state;
+
+    if (emails && comentarios && stars) {
+      this.setState((state) => ({
+        reviews: [...state.reviews, objAvaliar],
+        isInvalid: false,
+        emails: '',
+        comentarios: '',
+        stars: '',
+      }), this.saveAvaliation());
+    } else {
+      this.setState({ isInvalid: true });
+    }
+  };
+
+  saveAvaliation = () => {
+    const { reviews } = this.state;
+
+    const item = productId[0];
+
+    localStorage.setItem(`${item.id}`, JSON.stringify(reviews));
+  };
+
   render() {
-    const { productId } = this.state;
+    const { isInvalid, productId, emails, comentarios, stars, reviews } = this.state;
+
+    console.log(reviews);
+
     return (
       <div>
         <div>
@@ -79,7 +122,103 @@ export default class ProductDetails extends Component {
               >
                 add carrinho
               </button>
+
+              <div>
+                <form>
+                  <input
+                    data-testid="product-detail-email"
+                    type="email"
+                    name="emails"
+                    id="email"
+                    value={ emails }
+                    placeholder="Adicione um e-mail válido!"
+                    onChange={ this.handleChange }
+                  />
+
+                  <label htmlFor="1">
+                    <input
+                      type="radio"
+                      name="stars"
+                      id="1"
+                      value="1"
+                      data-testid="1-rating"
+                      onChange={ this.handleChange }
+                    />
+                    1 ⭐
+                  </label>
+
+                  <label htmlFor="2">
+                    <input
+                      type="radio"
+                      name="stars"
+                      id="2"
+                      value="2"
+                      data-testid="2-rating"
+                      onChange={ this.handleChange }
+                    />
+                    2 ⭐⭐
+                  </label>
+
+                  <label htmlFor="3">
+                    <input
+                      type="radio"
+                      name="stars"
+                      id="3"
+                      value="3"
+                      data-testid="3-rating"
+                      onChange={ this.handleChange }
+                    />
+                    3 ⭐⭐⭐
+                  </label>
+
+                  <label htmlFor="4">
+                    <input
+                      type="radio"
+                      name="stars"
+                      id="4"
+                      value="4"
+                      data-testid="4-rating"
+                      onChange={ this.handleChange }
+                    />
+                    4 ⭐⭐⭐⭐
+                  </label>
+
+                  <label htmlFor="5">
+                    <input
+                      type="radio"
+                      name="stars"
+                      id="5"
+                      value="5"
+                      data-testid="5-rating"
+                      onChange={ this.handleChange }
+                    />
+                    5 ⭐⭐⭐⭐⭐
+                  </label>
+
+                  <textarea
+                    name="comentarios"
+                    id="comentario"
+                    placeholder="Adicione aqui o seu comentário!"
+                    rows="20"
+                    cols="60"
+                    value={ comentarios }
+                    data-testid="product-detail-evaluation"
+                    onChange={ this.handleChange }
+                  />
+
+                  <button
+                    type="button"
+                    data-testid="submit-review-btn"
+                    onClick={ () => this.submitReview({ emails, comentarios, stars }) }
+                  >
+                    Enviar Avaliação!
+                  </button>
+                </form>
+
+                { isInvalid && <p data-testid="error-msg">Campos inválidos</p> }
+              </div>
             </div>
+
           )))}
         </div>
 
