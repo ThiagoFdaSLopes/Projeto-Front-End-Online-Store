@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Count from '../components/Count';
 import { setLocalItems } from '../services/api';
 
 export default class ShopCart extends Component {
   state = {
     carrinho: [],
+    itensCartQT: 0,
   };
 
   componentDidMount() {
@@ -13,8 +15,13 @@ export default class ShopCart extends Component {
 
   getLocalStorage = () => {
     const local = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const QTLocal = local.reduce((acc, curr) => {
+      acc += curr.quantidade;
+      return acc;
+    }, 0)
     this.setState({
       carrinho: local,
+      itensCartQT: QTLocal,
     });
   };
 
@@ -56,10 +63,11 @@ export default class ShopCart extends Component {
   };
 
   render() {
-    const { carrinho } = this.state;
+    const { carrinho, itensCartQT } = this.state;
     return (
       <div>
         <h1>Carrinho de compras</h1>
+        <Count itensCartQT={ itensCartQT } />
         {
           carrinho.length === 0
             ? <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
