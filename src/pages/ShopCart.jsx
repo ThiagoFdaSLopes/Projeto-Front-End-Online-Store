@@ -29,11 +29,16 @@ export default class ShopCart extends Component {
     const { carrinho } = this.state;
     const existe = carrinho.some((e) => e.id === objP.id);
     if (existe) {
-      objP.quantidade += 1;
-      const existente = carrinho.findIndex((e) => e.id === objP.id);
-      carrinho.splice(existente, 1);
-      carrinho.push(objP);
-      setLocalItems(carrinho);
+      const quantidadeEstoque = objP.available_quantity - 1;
+      objP.available_quantity = quantidadeEstoque;
+      if (quantidadeEstoque > 0) {
+        console.log(objP.available_quantity);
+        objP.quantidade += 1;
+        const existente = carrinho.findIndex((e) => e.id === objP.id);
+        carrinho.splice(existente, 1);
+        carrinho.push(objP);
+        setLocalItems(carrinho);
+      }
     }
     this.getLocalStorage();
   };
