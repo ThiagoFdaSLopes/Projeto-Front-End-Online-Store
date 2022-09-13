@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Count from '../components/Count';
 import { getProduct, setLocalItems } from '../services/api';
+import FormProductDetail from '../components/FormProductDetail';
 
 export default class ProductDetails extends Component {
   state = {
     productId: [],
-    // productObj: {},
     carrinho: [],
     itensCartQT: 0,
     reviews: [],
     emails: '',
     comentarios: '',
     stars: '',
-    // itemsAvaliacoes: [],
+    localAva: [],
     isInvalid: false,
   };
 
   componentDidMount() {
+    this.getLocalAva();
     const inicio = async () => {
       await this.getProducts();
     };
@@ -49,7 +50,6 @@ export default class ProductDetails extends Component {
     product.avaliacao = [];
     this.setState({
       productId: [product],
-      // productObj: product,
     });
   };
 
@@ -78,33 +78,41 @@ export default class ProductDetails extends Component {
     });
   };
 
-  submitReview = (objAvaliar) => {
+  submitReview = () => {
     const { emails, comentarios, stars } = this.state;
-
-    if (emails && comentarios && stars) {
+    const objAvaliar = { emails, comentarios, stars };
+    if (emails && stars) {
       this.setState((state) => ({
         reviews: [...state.reviews, objAvaliar],
         isInvalid: false,
         emails: '',
         comentarios: '',
         stars: '',
-      }), this.saveAvaliation());
+      }), this.saveAvaliation);
     } else {
       this.setState({ isInvalid: true });
     }
   };
 
+  getLocalAva = () => {
+    const { match: { params: { id } } } = this.props;
+    const getItems = JSON.parse(localStorage.getItem(`${id}`)) || [];
+    this.setState({
+      localAva: getItems,
+    });
+  };
+
   saveAvaliation = () => {
-    const { reviews } = this.state;
+    const { reviews, localAva } = this.state;
+    const { match: { params: { id } } } = this.props;
 
-    const item = productId[0];
-
-    localStorage.setItem(`${item.id}`, JSON.stringify(reviews));
+    localStorage.setItem(`${id}`, JSON.stringify([...reviews, ...localAva]));
+    this.getLocalAva();
   };
 
   render() {
     const { isInvalid,
-      productId, emails, comentarios, stars, itensCartQT } = this.state;
+      productId, emails, comentarios, stars, itensCartQT, localAva } = this.state;
     return (
       <div>
         <div>
@@ -136,104 +144,29 @@ export default class ProductDetails extends Component {
               >
                 add carrinho
               </button>
-
-              <div>
-                <form>
-                  <input
-                    data-testid="product-detail-email"
-                    type="email"
-                    name="emails"
-                    id="email"
-                    value={ emails }
-                    placeholder="Adicione um e-mail válido!"
-                    onChange={ this.handleChange }
-                  />
-
-                  <label htmlFor="1">
-                    <input
-                      type="radio"
-                      name="stars"
-                      id="1"
-                      value="1"
-                      data-testid="1-rating"
-                      onChange={ this.handleChange }
-                    />
-                    1 ⭐
-                  </label>
-
-                  <label htmlFor="2">
-                    <input
-                      type="radio"
-                      name="stars"
-                      id="2"
-                      value="2"
-                      data-testid="2-rating"
-                      onChange={ this.handleChange }
-                    />
-                    2 ⭐⭐
-                  </label>
-
-                  <label htmlFor="3">
-                    <input
-                      type="radio"
-                      name="stars"
-                      id="3"
-                      value="3"
-                      data-testid="3-rating"
-                      onChange={ this.handleChange }
-                    />
-                    3 ⭐⭐⭐
-                  </label>
-
-                  <label htmlFor="4">
-                    <input
-                      type="radio"
-                      name="stars"
-                      id="4"
-                      value="4"
-                      data-testid="4-rating"
-                      onChange={ this.handleChange }
-                    />
-                    4 ⭐⭐⭐⭐
-                  </label>
-
-                  <label htmlFor="5">
-                    <input
-                      type="radio"
-                      name="stars"
-                      id="5"
-                      value="5"
-                      data-testid="5-rating"
-                      onChange={ this.handleChange }
-                    />
-                    5 ⭐⭐⭐⭐⭐
-                  </label>
-
-                  <textarea
-                    name="comentarios"
-                    id="comentario"
-                    placeholder="Adicione aqui o seu comentário!"
-                    rows="20"
-                    cols="60"
-                    value={ comentarios }
-                    data-testid="product-detail-evaluation"
-                    onChange={ this.handleChange }
-                  />
-
-                  <button
-                    type="button"
-                    data-testid="submit-review-btn"
-                    onClick={ () => this.submitReview({ emails, comentarios, stars }) }
-                  >
-                    Enviar Avaliação!
-                  </button>
-                </form>
-
-                { isInvalid && <p data-testid="error-msg">Campos inválidos</p> }
-              </div>
             </div>
-
           )))}
+        </div>
+        <div>
+          <FormProductDetail
+            emails={ emails }
+            comentarios={ comentarios }
+            stars={ stars }
+            handleChange={ this.handleChange }
+            submitReview={ this.submitReview }
+            isInvalid={ isInvalid }
+          />
+        </div>
+        <div>
+          {
+            localAva.map((e, i) => (
+              <div key={ i }>
+                <p data-testid="review-card-email">{e.emails}</p>
+                <p data-testid="review-card-rating">{e.comentarios}</p>
+                <p data-testid="review-card-evaluation">{e.stars}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     );
