@@ -127,6 +127,9 @@ export default class Home extends Component {
                 listProdutos.map((e) => (
                   <div data-testid="product" key={ e.id }>
                     <div>
+                      {
+                        e.shipping.free_shipping && <p data-testid="free-shipping">Frete grátis</p>
+                      }
                       <img src={ e.thumbnail } alt={ e.title } />
                       <p>{e.title}</p>
                       <p>{`Valor: ${e.price}`}</p>
@@ -137,6 +140,7 @@ export default class Home extends Component {
                         Detalhes
 
                       </Link>
+
                     </div>
 
                     <div>
