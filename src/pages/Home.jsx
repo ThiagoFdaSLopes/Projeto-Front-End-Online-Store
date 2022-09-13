@@ -128,7 +128,8 @@ export default class Home extends Component {
                   <div data-testid="product" key={ e.id }>
                     <div>
                       {
-                        e.shipping.free_shipping && <p data-testid="free-shipping">Frete grátis</p>
+                        e.shipping.free_shipping
+                        && <p data-testid="free-shipping">Frete grátis</p>
                       }
                       <img src={ e.thumbnail } alt={ e.title } />
                       <p>{e.title}</p>
