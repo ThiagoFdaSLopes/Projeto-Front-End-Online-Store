@@ -165,13 +165,17 @@ export default class Home extends Component {
                     key={ e.id }
                     className="card-produto"
                   >
-                    <div>
+                    <div className="card-text">
                       {e.shipping.free_shipping && (
                         <p data-testid="free-shipping">Frete grátis</p>
                       )}
-                      <img src={ e.thumbnail } alt={ e.title } />
+                      <img
+                        src={ e.thumbnail }
+                        alt={ e.title }
+                        className="img-products"
+                      />
                       <p>{e.title}</p>
-                      <p>{`Valor: ${e.price}`}</p>
+                      <p>{`R$: ${e.price}`}</p>
                       <Link
                         data-testid="product-detail-link"
                         to={ `/productdetails/${e.id}` }

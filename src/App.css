@@ -166,10 +166,14 @@ section {
 }
 
 .card-produto {
+  align-items: center;
   background-color: white;
   border-radius: 5px;
   box-shadow: 2.759px 2.759px 5.518px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
   height: 358.7px;
+  justify-content: space-around;
   width: 279.6px;
 }
 
@@ -190,13 +194,25 @@ section {
 
 .button-detalhes {
   border: none;
-  color: black;
+  color: rgb(54, 157, 241);
   font-family: Epilogue , sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  margin: 10px;
-  outline: none;
   text-align: center;
   text-decoration: none;
+}
+
+.card-text > p {
+  color: black;
+  font-family: Epilogue , sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  margin: 2px;
+}
+
+.img-products {
+  height: 10rem;
+  width: 10rem;
 }
