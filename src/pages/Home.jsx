@@ -6,6 +6,8 @@ import {
   getProductsFromCategoryAndQuery,
   setLocalItems,
 } from '../services/api';
+import logo from '../imgs/logo.svg';
+import searchButton from '../imgs/searchButton.svg';
 
 export default class Home extends Component {
   constructor() {
@@ -98,23 +100,29 @@ export default class Home extends Component {
     return (
       <>
         <header className="header-home">
-          <div className="campoDeBusca">
+          <div className="search">
             <input
               type="text"
               name="textBusca"
+              className="input-search"
               value={ textBusca }
+              placeholder="Digite o que você busca"
               onChange={ this.handleChange }
               data-testid="query-input"
             />
             <button
+              className="button-search"
               type="button"
               data-testid="query-button"
               onClick={ this.handleClick }
             >
-              Pesquisar
+              <img src={ searchButton } alt="search button" />
             </button>
-            <Count itensCartQT={ itensCartQT } />
           </div>
+          <div className="textos-header">
+            <img src={ logo } alt="logo front end" />
+          </div>
+          <Count itensCartQT={ itensCartQT } />
         </header>
         <div>
           {listProdutos.length === 0 && (
