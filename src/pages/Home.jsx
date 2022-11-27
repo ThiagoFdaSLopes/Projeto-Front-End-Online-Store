@@ -124,66 +124,74 @@ export default class Home extends Component {
           </div>
           <Count itensCartQT={ itensCartQT } />
         </header>
-        <div className="div-list-categoria">
-          <p>Categorias</p>
-          {categoriesList.map((elem) => (
-            <div
-              key={ elem.id }
-            >
-              <button
-                data-testid="category"
-                type="button"
-                name={ elem.id }
-                className="button-category"
-                onClick={ this.categoryClick }
+        <section>
+          <div className="div-list-categoria">
+            <p>Categorias</p>
+            {categoriesList.map((elem) => (
+              <div
+                key={ elem.id }
               >
-                {elem.name}
-              </button>
-            </div>
-          ))}
-        </div>
-        <div>
-          {listProdutos.length === 0 && (
-            <h1 data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </h1>
-          )}
-        </div>
-        <div>
-          {pesquisou && listProdutos.length === 0 ? (
-            <p>Nenhum produto foi encontrado</p>
-          ) : (
-            listProdutos.map((e) => (
-              <div data-testid="product" key={ e.id }>
-                <div>
-                  {e.shipping.free_shipping && (
-                    <p data-testid="free-shipping">Frete grátis</p>
-                  )}
-                  <img src={ e.thumbnail } alt={ e.title } />
-                  <p>{e.title}</p>
-                  <p>{`Valor: ${e.price}`}</p>
-                  <Link
-                    data-testid="product-detail-link"
-                    to={ `/productdetails/${e.id}` }
-                  >
-                    Detalhes
-                  </Link>
-                </div>
-
-                <div>
-                  <button
-                    name={ e.id }
-                    type="button"
-                    data-testid="product-add-to-cart"
-                    onClick={ () => this.handleCart(e.id) }
-                  >
-                    Adicionar ao Carrinho!
-                  </button>
-                </div>
+                <button
+                  data-testid="category"
+                  type="button"
+                  name={ elem.id }
+                  className="button-category"
+                  onClick={ this.categoryClick }
+                >
+                  {elem.name}
+                </button>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+          <div className="div-produtos">
+            {listProdutos.length === 0 && (
+              <div className="texts-no">
+                <p className="no-search">você ainda não realizou uma busca</p>
+                <p
+                  data-testid="home-initial-message"
+                  className="no-products"
+                >
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+                </p>
+              </div>
+            )}
+            <div>
+              {pesquisou && listProdutos.length === 0 ? (
+                <p>Nenhum produto foi encontrado</p>
+              ) : (
+                listProdutos.map((e) => (
+                  <div data-testid="product" key={ e.id }>
+                    <div>
+                      {e.shipping.free_shipping && (
+                        <p data-testid="free-shipping">Frete grátis</p>
+                      )}
+                      <img src={ e.thumbnail } alt={ e.title } />
+                      <p>{e.title}</p>
+                      <p>{`Valor: ${e.price}`}</p>
+                      <Link
+                        data-testid="product-detail-link"
+                        to={ `/productdetails/${e.id}` }
+                      >
+                        Detalhes
+                      </Link>
+                    </div>
+
+                    <div>
+                      <button
+                        name={ e.id }
+                        type="button"
+                        data-testid="product-add-to-cart"
+                        onClick={ () => this.handleCart(e.id) }
+                      >
+                        Adicionar ao Carrinho!
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
       </>
     );
   }
