@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Count from '../components/Count';
-import { getCategories, getProductsFromCategoryAndQuery,
-  setLocalItems } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+  setLocalItems,
+} from '../services/api';
+import logo from '../imgs/logo.svg';
+import searchButton from '../imgs/searchButton.svg';
 
 export default class Home extends Component {
   constructor() {
@@ -61,7 +66,10 @@ export default class Home extends Component {
   };
 
   categoryClick = async (event) => {
-    const produtos = await getProductsFromCategoryAndQuery(event.target.name, null);
+    const produtos = await getProductsFromCategoryAndQuery(
+      event.target.name,
+      null,
+    );
     this.setState({
       listProdutos: produtos.results,
       pesquisou: true,
@@ -87,103 +95,111 @@ export default class Home extends Component {
   };
 
   render() {
-    const { categoriesList,
-      textBusca, listProdutos, pesquisou, itensCartQT } = this.state;
+    const {
+      categoriesList, textBusca, listProdutos, pesquisou, itensCartQT } = this.state;
     return (
-      <main>
-        <div className="campoDeBusca">
-          <input
-            type="text"
-            name="textBusca"
-            value={ textBusca }
-            onChange={ this.handleChange }
-            data-testid="query-input"
-          />
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ this.handleClick }
-          >
-            Pesquisar
-          </button>
+      <>
+        <header className="header-home">
+          <div className="search">
+            <input
+              type="text"
+              name="textBusca"
+              className="input-search"
+              value={ textBusca }
+              placeholder="Digite o que você busca"
+              onChange={ this.handleChange }
+              data-testid="query-input"
+            />
+            <button
+              className="button-search"
+              type="button"
+              data-testid="query-button"
+              onClick={ this.handleClick }
+            >
+              <img src={ searchButton } alt="search button" />
+            </button>
+          </div>
+          <div className="textos-header">
+            <img src={ logo } alt="logo front end" />
+          </div>
           <Count itensCartQT={ itensCartQT } />
-        </div>
-        <div>
-          {
-            listProdutos.length === 0 && (
-              <h1
-                data-testid="home-initial-message"
+        </header>
+        <section>
+          <div className="div-list-categoria">
+            <p>Categorias</p>
+            {categoriesList.map((elem) => (
+              <div
+                key={ elem.id }
               >
-                Digite algum termo de pesquisa ou escolha uma categoria.
-
-              </h1>)
-          }
-        </div>
-        <div>
-          {
-            pesquisou && listProdutos.length === 0
-              ? <p>Nenhum produto foi encontrado</p>
-              : (
-                listProdutos.map((e) => (
-                  <div data-testid="product" key={ e.id }>
-                    <div>
-                      {
-                        e.shipping.free_shipping
-                        && <p data-testid="free-shipping">Frete grátis</p>
-                      }
-                      <img src={ e.thumbnail } alt={ e.title } />
-                      <p>{e.title}</p>
-                      <p>{`Valor: ${e.price}`}</p>
-                      <Link
-                        data-testid="product-detail-link"
-                        to={ `/productdetails/${e.id}` }
-                      >
-                        Detalhes
-
-                      </Link>
-
-                    </div>
-
-                    <div>
-                      <button
-                        name={ e.id }
-                        type="button"
-                        data-testid="product-add-to-cart"
-                        onClick={ () => this.handleCart(e.id) }
-                      >
-                        Adicionar ao Carrinho!
-                      </button>
-                    </div>
-                  </div>
-                ))
-              )
-          }
-        </div>
-        <div>
-          <p>
-            <Link to="/ShopCart" data-testid="shopping-cart-button">
-              Carrinho de compras
-            </Link>
-          </p>
-        </div>
-
-        <ul>
-          {
-            categoriesList.map((elem) => (
-              <div key={ elem.id }>
                 <button
                   data-testid="category"
                   type="button"
                   name={ elem.id }
+                  className="button-category"
                   onClick={ this.categoryClick }
                 >
-                  { elem.name }
+                  {elem.name}
                 </button>
               </div>
-            ))
-          }
-        </ul>
-      </main>
+            ))}
+          </div>
+          <div className="div-produtos">
+            {listProdutos.length === 0 && (
+              <div className="texts-no">
+                <p className="no-search">você ainda não realizou uma busca</p>
+                <p
+                  data-testid="home-initial-message"
+                  className="no-products"
+                >
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+                </p>
+              </div>
+            )}
+            <div className="produtos-list">
+              {pesquisou && listProdutos.length === 0 ? (
+                global.alert('Nenhum produto foi encontrado')
+              ) : (
+                listProdutos.map((e) => (
+                  <div
+                    data-testid="product"
+                    key={ e.id }
+                    className="card-produto"
+                  >
+                    <div className="card-text">
+                      {e.shipping.free_shipping && (
+                        <p data-testid="free-shipping">Frete grátis</p>
+                      )}
+                      <img
+                        src={ e.thumbnail }
+                        alt={ e.title }
+                        className="img-products"
+                      />
+                      <p>{e.title}</p>
+                      <p>{`R$: ${e.price}`}</p>
+                      <Link
+                        data-testid="product-detail-link"
+                        to={ `/productdetails/${e.id}` }
+                        className="button-detalhes"
+                      >
+                        Detalhes
+                      </Link>
+                    </div>
+                    <button
+                      name={ e.id }
+                      type="button"
+                      data-testid="product-add-to-cart"
+                      className="button-add"
+                      onClick={ () => this.handleCart(e.id) }
+                    >
+                      Adicionar ao Carrinho!
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+      </>
     );
   }
 }

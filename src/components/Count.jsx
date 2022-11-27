@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import carrinho from '../imgs/carrinho.svg';
 
 export default class Count extends Component {
   render() {
     const { itensCartQT } = this.props;
 
     return (
-      <div>
-        <h1>Quatidade de itens</h1>
-        <span data-testid="shopping-cart-size">{ itensCartQT }</span>
+      <div className="carrinho">
+        <img src={ carrinho } alt="" />
+        <Link to="/ShopCart" data-testid="shopping-cart-button">
+          <div className="circle-carrinho">
+            <span
+              data-testid="shopping-cart-size"
+              className="number-carrinho"
+            >
+              { itensCartQT }
+
+            </span>
+          </div>
+        </Link>
       </div>
     );
   }
