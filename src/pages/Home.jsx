@@ -124,6 +124,24 @@ export default class Home extends Component {
           </div>
           <Count itensCartQT={ itensCartQT } />
         </header>
+        <div className="div-list-categoria">
+          <p>Categorias</p>
+          {categoriesList.map((elem) => (
+            <div
+              key={ elem.id }
+            >
+              <button
+                data-testid="category"
+                type="button"
+                name={ elem.id }
+                className="button-category"
+                onClick={ this.categoryClick }
+              >
+                {elem.name}
+              </button>
+            </div>
+          ))}
+        </div>
         <div>
           {listProdutos.length === 0 && (
             <h1 data-testid="home-initial-message">
@@ -166,28 +184,6 @@ export default class Home extends Component {
             ))
           )}
         </div>
-        <div>
-          <p>
-            <Link to="/ShopCart" data-testid="shopping-cart-button">
-              Carrinho de compras
-            </Link>
-          </p>
-        </div>
-
-        <ul>
-          {categoriesList.map((elem) => (
-            <div key={ elem.id }>
-              <button
-                data-testid="category"
-                type="button"
-                name={ elem.id }
-                onClick={ this.categoryClick }
-              >
-                {elem.name}
-              </button>
-            </div>
-          ))}
-        </ul>
       </>
     );
   }
