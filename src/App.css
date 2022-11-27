@@ -167,7 +167,36 @@ section {
 
 .card-produto {
   background-color: white;
+  border-radius: 5px;
   box-shadow: 2.759px 2.759px 5.518px rgba(0, 0, 0, 0.05);
   height: 358.7px;
   width: 279.6px;
+}
+
+.button-add {
+  background-color: #30c991;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: Epilogue , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  height: 38.63px;
+  outline: none;
+  text-align: center;
+  width: 244.65px;
+}
+
+.button-detalhes {
+  border: none;
+  color: black;
+  font-family: Epilogue , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  margin: 10px;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
 }

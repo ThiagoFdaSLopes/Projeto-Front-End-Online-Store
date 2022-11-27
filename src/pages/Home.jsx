@@ -175,21 +175,20 @@ export default class Home extends Component {
                       <Link
                         data-testid="product-detail-link"
                         to={ `/productdetails/${e.id}` }
+                        className="button-detalhes"
                       >
                         Detalhes
                       </Link>
                     </div>
-
-                    <div>
-                      <button
-                        name={ e.id }
-                        type="button"
-                        data-testid="product-add-to-cart"
-                        onClick={ () => this.handleCart(e.id) }
-                      >
-                        Adicionar ao Carrinho!
-                      </button>
-                    </div>
+                    <button
+                      name={ e.id }
+                      type="button"
+                      data-testid="product-add-to-cart"
+                      className="button-add"
+                      onClick={ () => this.handleCart(e.id) }
+                    >
+                      Adicionar ao Carrinho!
+                    </button>
                   </div>
                 ))
               )}
