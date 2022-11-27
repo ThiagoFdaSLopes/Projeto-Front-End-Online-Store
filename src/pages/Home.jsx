@@ -155,12 +155,16 @@ export default class Home extends Component {
                 </p>
               </div>
             )}
-            <div>
+            <div className="produtos-list">
               {pesquisou && listProdutos.length === 0 ? (
                 global.alert('Nenhum produto foi encontrado')
               ) : (
                 listProdutos.map((e) => (
-                  <div data-testid="product" key={ e.id }>
+                  <div
+                    data-testid="product"
+                    key={ e.id }
+                    className="card-produto"
+                  >
                     <div>
                       {e.shipping.free_shipping && (
                         <p data-testid="free-shipping">Frete grátis</p>

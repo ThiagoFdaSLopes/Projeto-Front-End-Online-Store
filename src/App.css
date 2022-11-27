@@ -154,3 +154,20 @@ section {
   text-align: center;
   width: 347px;
 }
+
+.produtos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  width: 95rem;
+}
+
+.card-produto {
+  background-color: white;
+  box-shadow: 2.759px 2.759px 5.518px rgba(0, 0, 0, 0.05);
+  height: 358.7px;
+  width: 279.6px;
+}
