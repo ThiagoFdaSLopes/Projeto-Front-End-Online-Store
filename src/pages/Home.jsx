@@ -157,7 +157,7 @@ export default class Home extends Component {
             )}
             <div>
               {pesquisou && listProdutos.length === 0 ? (
-                <p>Nenhum produto foi encontrado</p>
+                global.alert('Nenhum produto foi encontrado')
               ) : (
                 listProdutos.map((e) => (
                   <div data-testid="product" key={ e.id }>
