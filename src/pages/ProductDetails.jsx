@@ -153,20 +153,21 @@ export default class ProductDetails extends Component {
                   </ul>
                 </div>
                 <div className="espect-buttom">
+                  <p data-testid="product-detail-price">{`R$: ${e.price}`}</p>
                   <button
                     type="button"
                     onClick={ () => this.sendCart(e) }
                     data-testid="product-detail-add-to-cart"
+                    className="button-add-details"
                   >
-                    add carrinho
+                    Add Carrinho
                   </button>
-                  <p data-testid="product-detail-price">{`Price: ${e.price}`}</p>
                 </div>
               </div>
             </>
           )))}
         </section>
-        <div>
+        <div className="form-productDetail">
           <FormProductDetail
             emails={ emails }
             comentarios={ comentarios }

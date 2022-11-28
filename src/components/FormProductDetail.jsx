@@ -5,19 +5,23 @@ export default class FormProductDetail extends Component {
   render() {
     const { emails, comentarios, isInvalid, handleChange, submitReview } = this.props;
     return (
-      <div>
-        <form>
+      <div className="box-form">
+        <p>Avaliações</p>
+        <form className="form">
           <input
             data-testid="product-detail-email"
             type="email"
             name="emails"
             id="email"
             value={ emails }
+            placeholder="Email"
+            className="input-form-email"
             onChange={ handleChange }
           />
 
           <label htmlFor="1">
             <input
+              className="star-rating"
               type="radio"
               name="stars"
               id="1"
@@ -82,6 +86,7 @@ export default class FormProductDetail extends Component {
             rows="20"
             cols="60"
             value={ comentarios }
+            placeholder="Mensagem(Opcional)"
             data-testid="product-detail-evaluation"
             onChange={ handleChange }
           />
