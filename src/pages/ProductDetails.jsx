@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Count from '../components/Count';
 import { getProduct, setLocalItems } from '../services/api';
 import FormProductDetail from '../components/FormProductDetail';
+import logo from '../imgs/logo.svg';
 
 export default class ProductDetails extends Component {
   state = {
@@ -114,40 +114,60 @@ export default class ProductDetails extends Component {
     const { isInvalid,
       productId, emails, comentarios, stars, itensCartQT, localAva } = this.state;
     return (
-      <div>
-        <div>
-          <p>
-            <Link to="/ShopCart" data-testid="shopping-cart-button">
-              Carrinho de compras
-            </Link>
-          </p>
+      <>
+        <header className="header-details">
+          <div className="textos-details">
+            <img src={ logo } alt="logo front end" />
+          </div>
           <Count itensCartQT={ itensCartQT } />
-        </div>
-        <div>
+        </header>
+        <section className="page-details">
           {productId.length > 0 && (productId.map((e) => (
-            <div key={ e.id }>
-              <div>
-                <img
-                  data-testid="product-detail-image"
-                  src={ e.thumbnail }
-                  alt={ e.title }
-                />
+            <>
+              <div className="thumbnail-details">
+                <div className="produt-img">
+                  <p data-testid="product-detail-name">{e.title}</p>
+                  <img
+                    data-testid="product-detail-image"
+                    src={ e.thumbnail }
+                    alt={ e.title }
+                  />
+                </div>
               </div>
-              <div>
-                <p data-testid="product-detail-name">{e.title}</p>
-                <p data-testid="product-detail-price">{`Price: ${e.price}`}</p>
+              <div className="espect-tec">
+                <div className="espect-box">
+                  <p className="espect-text">Especificações técnicas</p>
+                  <ul className="ul-espect">
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                  </ul>
+                </div>
+                <div className="espect-buttom">
+                  <p data-testid="product-detail-price">{`R$: ${e.price}`}</p>
+                  <button
+                    type="button"
+                    onClick={ () => this.sendCart(e) }
+                    data-testid="product-detail-add-to-cart"
+                    className="button-add-details"
+                  >
+                    Add Carrinho
+                  </button>
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={ () => this.sendCart(e) }
-                data-testid="product-detail-add-to-cart"
-              >
-                add carrinho
-              </button>
-            </div>
+            </>
           )))}
-        </div>
-        <div>
+        </section>
+        <div className="form-productDetail">
           <FormProductDetail
             emails={ emails }
             comentarios={ comentarios }
@@ -156,19 +176,28 @@ export default class ProductDetails extends Component {
             submitReview={ this.submitReview }
             isInvalid={ isInvalid }
           />
-        </div>
-        <div>
           {
             localAva.map((e, i) => (
-              <div key={ i }>
-                <p data-testid="review-card-email">{e.emails}</p>
-                <p data-testid="review-card-rating">{e.comentarios}</p>
-                <p data-testid="review-card-evaluation">{e.stars}</p>
+              <div
+                key={ i }
+                className="avaliation"
+              >
+                <div className="card-email-stars">
+                  <p data-testid="review-card-email">{e.emails}</p>
+                  <p data-testid="review-card-evaluation">{e.stars}</p>
+                </div>
+                <p
+                  data-testid="review-card-rating"
+                  className="text-comentario"
+                >
+                  {e.comentarios}
+
+                </p>
               </div>
             ))
           }
         </div>
-      </div>
+      </>
     );
   }
 }
