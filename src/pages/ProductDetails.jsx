@@ -134,15 +134,34 @@ export default class ProductDetails extends Component {
                   />
                 </div>
               </div>
-              <div>
-                <p data-testid="product-detail-price">{`Price: ${e.price}`}</p>
-                <button
-                  type="button"
-                  onClick={ () => this.sendCart(e) }
-                  data-testid="product-detail-add-to-cart"
-                >
-                  add carrinho
-                </button>
+              <div className="espect-tec">
+                <div className="espect-box">
+                  <p className="espect-text">Especificações técnicas</p>
+                  <ul className="ul-espect">
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                    <li>Lorem Ipsum Alaba Madim Fortim</li>
+                  </ul>
+                </div>
+                <div className="espect-buttom">
+                  <button
+                    type="button"
+                    onClick={ () => this.sendCart(e) }
+                    data-testid="product-detail-add-to-cart"
+                  >
+                    add carrinho
+                  </button>
+                  <p data-testid="product-detail-price">{`Price: ${e.price}`}</p>
+                </div>
               </div>
             </>
           )))}
