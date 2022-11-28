@@ -182,9 +182,17 @@ export default class ProductDetails extends Component {
                 key={ i }
                 className="avaliation"
               >
-                <p data-testid="review-card-email">{e.emails}</p>
-                <p data-testid="review-card-evaluation">{e.stars}</p>
-                <p data-testid="review-card-rating">{e.comentarios}</p>
+                <div className="card-email-stars">
+                  <p data-testid="review-card-email">{e.emails}</p>
+                  <p data-testid="review-card-evaluation">{e.stars}</p>
+                </div>
+                <p
+                  data-testid="review-card-rating"
+                  className="text-comentario"
+                >
+                  {e.comentarios}
+
+                </p>
               </div>
             ))
           }

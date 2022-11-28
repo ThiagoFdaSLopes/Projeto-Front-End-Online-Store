@@ -444,3 +444,29 @@ section {
   margin-top: 0.5rem;
   width: 105rem;
 }
+
+.card-email-stars {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+  justify-content: space-around;
+  width: 20rem;
+}
+
+.card-email-stars :nth-child( 1 ) {
+  font-family: Epilogue , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.text-comentario {
+  color: #94979d;
+  font-family: Epilogue , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin-left: 2.2rem;
+  margin-top: 1rem;
+}
