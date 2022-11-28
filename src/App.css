@@ -357,6 +357,7 @@ section {
 .form-productDetail {
   background-color: #e1e5eb;
   display: flex;
+  height: 55rem;
   justify-content: center;
   width: 100%;
 }
@@ -384,20 +385,50 @@ section {
 }
 
 .form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 2rem;
   width: 50%;
+}
+
+.rating {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  width: 30.5rem;
 }
 
 .input-form-email {
   background-color: white;
   border: 1px solid #94979d;
   height: 35px;
+  margin-bottom: 1rem;
   outline: none;
   width: 325px;
 }
 
-.star-rating {
-  background: url('../src/imgs/star.svg');
-  background-color: #94979d;
-  overflow: hidden;
+.mensagem {
+  background-color: white;
+  border: 1px solid #94979d;
+  height: 152px;
+  outline: none;
+  width: 488px;
+}
+
+.submit-review {
+  background-color: #30c991;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: Epilogue , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  height: 38.63px;
+  margin-top: 10px;
+  outline: none;
+  text-align: center;
+  width: 244.65px;
 }
