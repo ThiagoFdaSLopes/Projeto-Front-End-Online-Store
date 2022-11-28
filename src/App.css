@@ -470,3 +470,9 @@ section {
   margin-left: 2.2rem;
   margin-top: 1rem;
 }
+
+.produtos-carrinho {
+  background-color: #003be5;
+  border-bottom: 1px solid #94979d;
+  width: 40rem;
+}
