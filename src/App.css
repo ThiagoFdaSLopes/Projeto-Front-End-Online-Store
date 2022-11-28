@@ -355,10 +355,11 @@ section {
 }
 
 .form-productDetail {
+  align-items: center;
   background-color: #e1e5eb;
   display: flex;
+  flex-direction: column;
   height: 55rem;
-  justify-content: center;
   width: 100%;
 }
 
@@ -431,4 +432,15 @@ section {
   outline: none;
   text-align: center;
   width: 244.65px;
+}
+
+.avaliation {
+  align-items: flex-start;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 8rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+  width: 105rem;
 }

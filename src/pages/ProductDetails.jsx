@@ -176,14 +176,15 @@ export default class ProductDetails extends Component {
             submitReview={ this.submitReview }
             isInvalid={ isInvalid }
           />
-        </div>
-        <div>
           {
             localAva.map((e, i) => (
-              <div key={ i }>
+              <div
+                key={ i }
+                className="avaliation"
+              >
                 <p data-testid="review-card-email">{e.emails}</p>
-                <p data-testid="review-card-rating">{e.comentarios}</p>
                 <p data-testid="review-card-evaluation">{e.stars}</p>
+                <p data-testid="review-card-rating">{e.comentarios}</p>
               </div>
             ))
           }
