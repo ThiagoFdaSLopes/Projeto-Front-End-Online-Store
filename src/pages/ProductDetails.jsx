@@ -121,30 +121,32 @@ export default class ProductDetails extends Component {
           </div>
           <Count itensCartQT={ itensCartQT } />
         </header>
-        <div>
+        <section className="page-details">
           {productId.length > 0 && (productId.map((e) => (
-            <div key={ e.id }>
-              <div>
-                <img
-                  data-testid="product-detail-image"
-                  src={ e.thumbnail }
-                  alt={ e.title }
-                />
+            <>
+              <div className="thumbnail-details">
+                <div className="produt-img">
+                  <p data-testid="product-detail-name">{e.title}</p>
+                  <img
+                    data-testid="product-detail-image"
+                    src={ e.thumbnail }
+                    alt={ e.title }
+                  />
+                </div>
               </div>
               <div>
-                <p data-testid="product-detail-name">{e.title}</p>
                 <p data-testid="product-detail-price">{`Price: ${e.price}`}</p>
+                <button
+                  type="button"
+                  onClick={ () => this.sendCart(e) }
+                  data-testid="product-detail-add-to-cart"
+                >
+                  add carrinho
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={ () => this.sendCart(e) }
-                data-testid="product-detail-add-to-cart"
-              >
-                add carrinho
-              </button>
-            </div>
+            </>
           )))}
-        </div>
+        </section>
         <div>
           <FormProductDetail
             emails={ emails }
