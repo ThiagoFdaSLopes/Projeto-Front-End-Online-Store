@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Count from '../components/Count';
 import { getProduct, setLocalItems } from '../services/api';
 import FormProductDetail from '../components/FormProductDetail';
+import logo from '../imgs/logo.svg';
 
 export default class ProductDetails extends Component {
   state = {
@@ -114,15 +114,13 @@ export default class ProductDetails extends Component {
     const { isInvalid,
       productId, emails, comentarios, stars, itensCartQT, localAva } = this.state;
     return (
-      <div>
-        <div>
-          <p>
-            <Link to="/ShopCart" data-testid="shopping-cart-button">
-              Carrinho de compras
-            </Link>
-          </p>
+      <>
+        <header className="header-details">
+          <div className="textos-details">
+            <img src={ logo } alt="logo front end" />
+          </div>
           <Count itensCartQT={ itensCartQT } />
-        </div>
+        </header>
         <div>
           {productId.length > 0 && (productId.map((e) => (
             <div key={ e.id }>
@@ -168,7 +166,7 @@ export default class ProductDetails extends Component {
             ))
           }
         </div>
-      </div>
+      </>
     );
   }
 }
