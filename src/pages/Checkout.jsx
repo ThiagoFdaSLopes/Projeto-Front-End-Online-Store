@@ -102,15 +102,17 @@ export default class Checkout extends Component {
               }
             </div>
           </div>
-          <div>
-            <form>
+          <div className='checkout-form'>
+            <form className='form-checkout'>
+              <p>Informações do comprador</p>
               <label htmlFor="fullname">
                 <input
                   type="text"
                   data-testid="checkout-fullname"
                   name="fullname"
                   value={ fullname }
-                  placeholder='Nome completo'
+                  className="input-text"
+                  placeholder="Nome completo"
                   onChange={ this.handleChange }
                 />
               </label>
@@ -120,6 +122,7 @@ export default class Checkout extends Component {
                   data-testid="checkout-email"
                   name="email"
                   value={ email }
+                  className="input-text"
                   placeholder="Email"
                   onChange={ this.handleChange }
                 />
@@ -130,6 +133,7 @@ export default class Checkout extends Component {
                   data-testid="checkout-cpf"
                   name="cpf"
                   value={ cpf }
+                  className="input-text"
                   placeholder="CPF"
                   onChange={ this.handleChange }
                 />
@@ -140,6 +144,7 @@ export default class Checkout extends Component {
                   data-testid="checkout-phone"
                   name="phone"
                   value={ phone }
+                  className="input-text"
                   placeholder="Telefone"
                   onChange={ this.handleChange }
                 />
@@ -150,6 +155,7 @@ export default class Checkout extends Component {
                   data-testid="checkout-cep"
                   name="cep"
                   value={ cep }
+                  className="input-text"
                   placeholder="Cep"
                   onChange={ this.handleChange }
                 />
@@ -159,11 +165,13 @@ export default class Checkout extends Component {
                   type="text"
                   data-testid="checkout-address"
                   name="endereco"
+                  className="input-text"
                   value={ endereco }
                   placeholder="Endereço"
                   onChange={ this.handleChange }
                 />
               </label>
+              <div>
               <label htmlFor="1">
                 Boleto
                 <input
@@ -174,7 +182,7 @@ export default class Checkout extends Component {
                   id="1"
                   onChange={ this.handleChange }
                 />
-                <img src={boleto} alt="forma de pagamento boleto" />
+                <img src={ boleto } alt="forma de pagamento boleto" />
               </label>
               <label htmlFor="2">
                 Visa
@@ -186,7 +194,7 @@ export default class Checkout extends Component {
                   id="2"
                   onChange={ this.handleChange }
                 />
-                <img src={visa} alt="forma de pagamento visa" />
+                <img src={ visa } alt="forma de pagamento visa" />
               </label>
               <label htmlFor="3">
                 Master Card
@@ -198,7 +206,7 @@ export default class Checkout extends Component {
                   id="3"
                   onChange={ this.handleChange }
                 />
-                <img src={mastercard} alt="forma de pagamento mastercard" />
+                <img src={ mastercard } alt="forma de pagamento mastercard" />
               </label>
               <label htmlFor="4">
                 Elo
@@ -210,8 +218,9 @@ export default class Checkout extends Component {
                   id="4"
                   onChange={ this.handleChange }
                 />
-                <img src={elo} alt="forma de pagamento elo" />
+                <img src={ elo } alt="forma de pagamento elo" />
               </label>
+              </div>
               <button
                 type="button"
                 data-testid="checkout-btn"

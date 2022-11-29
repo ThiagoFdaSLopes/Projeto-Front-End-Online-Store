@@ -557,3 +557,24 @@ section {
 .button-finally:hover {
   background-color: #22e69e;
 }
+
+.checkout-form {
+  display: flex;
+  justify-content: center;
+  width: 70rem;
+}
+
+.form-checkout {
+  background-color: #22e69e;
+  height: 40rem;
+  width: 60rem;
+}
+
+.form-checkout .input-text {
+  background: #fdfdfd;
+  border: 1px solid #94979d;
+  height: 2.2rem;
+  margin: 5px;
+  outline: none;
+  width: 18rem;
+}
