@@ -75,7 +75,7 @@ export default class Checkout extends Component {
     return (
       <>
         <header className="header-checkout">
-          <div className="textos-checkout">
+          <div>
             <img src={ logo } alt="logo front end" />
           </div>
         </header>
