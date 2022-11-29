@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom';
 import { setLocalItems } from '../services/api';
+import logo from '../imgs/logo.svg';
 
 export default class Checkout extends Component {
   state = {
@@ -72,7 +73,12 @@ export default class Checkout extends Component {
       fullname, email, phone, cpf, cep, redirect, isInvalid, endereco } = this.state;
 
     return (
-      <div>
+      <>
+        <header className="header-checkout">
+          <div className="textos-checkout">
+            <img src={ logo } alt="logo front end" />
+          </div>
+        </header>
         <div>
           {
             carrinho.length === 0
@@ -210,7 +216,7 @@ export default class Checkout extends Component {
             isInvalid && <p data-testid="error-msg">Campos inválidos</p>
           }
         </div>
-      </div>
+      </>
     );
   }
 }
