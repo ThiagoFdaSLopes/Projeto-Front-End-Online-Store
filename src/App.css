@@ -470,3 +470,80 @@ section {
   margin-left: 2.2rem;
   margin-top: 1rem;
 }
+
+.produtos-carrinho {
+  border-bottom: 1px solid #94979d;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 40rem;
+}
+
+.button-removeItem {
+  background: none;
+  border: none;
+  color: #b0b3bb;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.card-name-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  width: 20rem;
+}
+
+.card-name-price p {
+  margin: 3px;
+  text-align: center;
+}
+
+.alter-value {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  width: 5rem;
+}
+
+.alter-value button {
+  background: none;
+  border: none;
+  color: #b0b3bb;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 15px;
+}
+
+.alter-value p {
+  border-radius: 100%;
+  font-size: 16px;
+  text-align: center;
+}
+
+.button-finalizar {
+  align-items: center;
+  display: flex;
+  height: 53rem;
+  justify-content: center;
+  width: 70rem;
+}
+
+.button-finally {
+  background-color: #30c991;
+  color: white;
+  font-size: 24px;
+  padding: 1rem 4rem;
+  text-decoration: none;
+}
+
+.button-finally:hover {
+  background-color: #22e69e;
+}

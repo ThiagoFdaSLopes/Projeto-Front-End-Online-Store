@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Count from '../components/Count';
 import { setLocalItems } from '../services/api';
+import logo from '../imgs/logo.svg';
 
 export default class ShopCart extends Component {
   state = {
@@ -70,57 +71,84 @@ export default class ShopCart extends Component {
   render() {
     const { carrinho, itensCartQT } = this.state;
     return (
-      <div>
-        <h1>Carrinho de compras</h1>
-        <Count itensCartQT={ itensCartQT } />
-        {
-          carrinho.length === 0
-            ? <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
-            : (
-              carrinho.map((e) => (
-                <div data-testid="product" key={ e.id }>
-                  <div>
-                    <img src={ e.thumbnail } alt={ e.title } />
-                    <p data-testid="shopping-cart-product-name">{e.title}</p>
-                    <p>{`Valor: ${e.price}`}</p>
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      data-testid="product-increase-quantity"
-                      onClick={ () => this.sum(e) }
+      <>
+        <header className="header-details">
+          <div className="textos-details">
+            <img src={ logo } alt="logo front end" />
+          </div>
+          <Count itensCartQT={ itensCartQT } />
+        </header>
+        <section className="page-details">
+          <div className="thumbnail-details">
+            <div className="produt-img">
+              {
+                carrinho.length === 0
+                  ? (
+                    <h1
+                      data-testid="shopping-cart-empty-message"
                     >
-                      +
-                    </button>
-                    <p data-testid="shopping-cart-product-quantity">
-                      {e.quantidade}
-                    </p>
-                    <button
-                      type="button"
-                      data-testid="product-decrease-quantity"
-                      onClick={ () => this.sub(e) }
-                    >
-                      -
-                    </button>
-                    <button
-                      type="button"
-                      data-testid="remove-product"
-                      onClick={ () => this.remove(e) }
-                    >
-                      remova item
-                    </button>
-                  </div>
-                </div>
-              ))
-            )
-        }
-        <Link
-          data-testid="checkout-products"
-          to="/checkout"
-        >
-          Finalizar compra
-        </Link>
-      </div>
+                      Seu carrinho está vazio
+                    </h1>
+
+                  ) : (
+                    carrinho.map((e) => (
+                      <div
+                        key={ e.id }
+                        className="produtos-carrinho"
+                      >
+                        <button
+                          type="button"
+                          data-testid="remove-product"
+                          onClick={ () => this.remove(e) }
+                          className="button-removeItem"
+                        >
+                          X
+                        </button>
+                        <img src={ e.thumbnail } alt={ e.title } />
+                        <div className="card-name-price">
+                          <p data-testid="shopping-cart-product-name">{e.title}</p>
+                          <p>{`R$: ${e.price}`}</p>
+                        </div>
+                        <div className="alter-value">
+                          <button
+                            type="button"
+                            data-testid="product-increase-quantity"
+                            onClick={ () => this.sum(e) }
+                          >
+                            +
+                          </button>
+                          <div className="quantity">
+                            <p data-testid="shopping-cart-product-quantity">
+                              {e.quantidade}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            data-testid="product-decrease-quantity"
+                            onClick={ () => this.sub(e) }
+                          >
+                            -
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )
+              }
+            </div>
+          </div>
+          <div className="button-finalizar">
+            <div>
+              <Link
+                data-testid="checkout-products"
+                to="/checkout"
+                className="button-finally"
+              >
+                Finalizar compra
+              </Link>
+            </div>
+          </div>
+        </section>
+      </>
     );
   }
 }
