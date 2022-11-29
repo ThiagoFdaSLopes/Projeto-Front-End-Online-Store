@@ -100,13 +100,16 @@ export default class ShopCart extends Component {
                           type="button"
                           data-testid="remove-product"
                           onClick={ () => this.remove(e) }
+                          className="button-removeItem"
                         >
-                          remova item
+                          X
                         </button>
                         <img src={ e.thumbnail } alt={ e.title } />
-                        <p data-testid="shopping-cart-product-name">{e.title}</p>
-                        <p>{`Valor: ${e.price}`}</p>
-                        <div>
+                        <div className="card-name-price">
+                          <p data-testid="shopping-cart-product-name">{e.title}</p>
+                          <p>{`R$: ${e.price}`}</p>
+                        </div>
+                        <div className="alter-value">
                           <button
                             type="button"
                             data-testid="product-increase-quantity"
@@ -114,9 +117,11 @@ export default class ShopCart extends Component {
                           >
                             +
                           </button>
-                          <p data-testid="shopping-cart-product-quantity">
-                            {e.quantidade}
-                          </p>
+                          <div className="quantity">
+                            <p data-testid="shopping-cart-product-quantity">
+                              {e.quantidade}
+                            </p>
+                          </div>
                           <button
                             type="button"
                             data-testid="product-decrease-quantity"
@@ -131,13 +136,18 @@ export default class ShopCart extends Component {
               }
             </div>
           </div>
+          <div className="button-finalizar">
+            <div>
+              <Link
+                data-testid="checkout-products"
+                to="/checkout"
+                className="button-finally"
+              >
+                Finalizar compra
+              </Link>
+            </div>
+          </div>
         </section>
-        <Link
-          data-testid="checkout-products"
-          to="/checkout"
-        >
-          Finalizar compra
-        </Link>
       </>
     );
   }
