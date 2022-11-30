@@ -559,14 +559,18 @@ section {
 }
 
 .checkout-form {
+  align-items: center;
   display: flex;
   justify-content: center;
   width: 70rem;
 }
 
 .form-checkout {
-  background-color: #22e69e;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   height: 40rem;
+  justify-content: center;
   width: 60rem;
 }
 
@@ -576,5 +580,42 @@ section {
   height: 2.2rem;
   margin: 5px;
   outline: none;
-  width: 18rem;
+  width: 23rem;
+}
+
+.form-pag {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  height: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 40rem;
+}
+
+.p-formpagamento {
+  color: #444955;
+  font-size: 18px;
+  margin: 1rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button-checkout {
+  background: none;
+  background-color: #17b379;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  height: 3rem;
+  margin-top: 5rem;
+  text-align: center;
+  width: 12rem;
+}
+
+.button-checkout:hover {
+  background-color: #22e69e;
 }

@@ -104,7 +104,7 @@ export default class Checkout extends Component {
           </div>
           <div className='checkout-form'>
             <form className='form-checkout'>
-              <p>Informações do comprador</p>
+              <p className='p-formpagamento'>Informações do comprador</p>
               <label htmlFor="fullname">
                 <input
                   type="text"
@@ -171,7 +171,8 @@ export default class Checkout extends Component {
                   onChange={ this.handleChange }
                 />
               </label>
-              <div>
+              <p className='p-formpagamento'>Forma de pagamento</p>
+              <div className='form-pag'>
               <label htmlFor="1">
                 Boleto
                 <input
@@ -225,6 +226,7 @@ export default class Checkout extends Component {
                 type="button"
                 data-testid="checkout-btn"
                 onClick={ this.handleButton }
+                className="button-checkout"
               >
                 Enviar
               </button>
